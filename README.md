@@ -9,7 +9,7 @@
 
 1. Clone the repository:
    ```sh
-   git clone <git lab template url>
+   git clone https://github.com/kwiatkowskijan/ts-async-queue
    ```
 
 2. Navigate to the project directory:
