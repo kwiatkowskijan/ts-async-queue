@@ -19,7 +19,7 @@ export class Queue<T> implements AsyncWorkerQueue<T> {
     }
 
     async processQueue() {
-        while (this.activeTasks < this.concurrency && !this.isEmpty()) {
+        while (this.activeTasks < this.concurrency && !this.isEmpty() && !this.isPaused) {
             const taskItem = this.queue.shift();
             if (!taskItem) break;
 
@@ -57,9 +57,12 @@ export class Queue<T> implements AsyncWorkerQueue<T> {
 
     pause(): void {
         this.isPaused = true;
+        console.log("Pause")
     }
 
     resume(): void {
         this.isPaused = false;
+        console.log("Resume")
+        this.processQueue();
     }
 }
