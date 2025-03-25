@@ -7,16 +7,12 @@ const workerFunction = async (value: number) => {
     console.log(`${value} waited for ${duration} ms`);
 };
 
-// const failingWorker = async (value: number) => {
-//     throw new Error(`Task ${value} failed`);
-// };
-
 async function main() {
     // Create a queue for an async worker function with 3 concurrent workers
     const queue = createAsyncWorkerQueue<number>(Queue, workerFunction, 3
     );
     // Add some data to the queue
-    queue.push(10, () => {console.log("Task 10 finished")});
+    queue.push(10, () => console.log("Task 10 finished"));
     queue.push(9);
     queue.push(8, () => console.log("Task 8 finished"));
     queue.push(7);
@@ -27,11 +23,12 @@ async function main() {
     queue.push(2, () => console.log("Task 2 finished"));
     queue.push(1);
                     
+    // Test pause/resume
     setTimeout(() => {
         queue.pause();
         setTimeout(() => {
             queue.resume();
-        }, 20000);
+        }, 15000);
     }, 1000);
 
     // Wait until all workers finished
