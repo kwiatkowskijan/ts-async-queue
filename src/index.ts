@@ -27,12 +27,12 @@ async function main() {
     queue.push(2, () => console.log("Task 2 finished"));
     queue.push(1);
                     
-    // setTimeout(() => {
-    //     queue.pause();
-    //     setTimeout(() => {
-    //         queue.resume();
-    //     }, 5000);
-    // }, 1000);
+    setTimeout(() => {
+        queue.pause();
+        setTimeout(() => {
+            queue.resume();
+        }, 20000);
+    }, 1000);
 
     // Wait until all workers finished
     await queue.waitForAll();
